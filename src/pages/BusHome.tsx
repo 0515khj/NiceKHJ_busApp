@@ -96,8 +96,8 @@ const BusHome = () => {
       {error && <p>에러 : {error}</p>}
 
       <div className="box_legend">
-        <span>← 멀리</span>
-        <span>내 정류장 ●</span>
+        <span>오는 중 →</span>
+        <span>도착 ●</span>
       </div>
 
       {stops.map((stop, idx) => (

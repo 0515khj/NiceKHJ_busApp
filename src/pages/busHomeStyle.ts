@@ -81,6 +81,7 @@ export const BusHomeWrap = styled.div<{ $mode: Mode }>`
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
+    padding: 0 15px;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.06em;

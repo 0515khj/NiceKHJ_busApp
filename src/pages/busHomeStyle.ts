@@ -1,37 +1,54 @@
 import styled, { keyframes } from "styled-components";
+import type { Mode } from "@/conpig/presets";
 
 const spin = keyframes`
   to { transform: rotate(360deg); }
 `;
 
-export const BusHomeWrap = styled.div`
+export const BusHomeWrap = styled.div<{ $mode: Mode }>`
+  --accent: ${({ $mode }) => ($mode === "work" ? "#ff8a3d" : "#a78bfa")};
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -160px;
+    right: -140px;
+    width: 340px;
+    height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
   .box_today {
+    position: relative;
+    margin-bottom: 24px;
     font-size: 13px;
     font-weight: 500;
     color: var(--sub);
   }
   .box_bus-reload {
+    position: relative;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin: 8px 0 20px;
-    .text_bus-title {
-      font-weight: 700;
-      font-size: 26px;
-      letter-spacing: -0.02em;
-    }
+    align-items: flex-start;
+    margin-bottom: 8px;
+
     .button_reload {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
       min-height: 40px;
-      padding: 0 14px;
+      padding: 0 12px;
       border-radius: 20px;
-      border: 1px solid #d5d8d2;
-      background: #fff;
-      font-size: 13px;
-      font-weight: 500;
-      color: #3a3d42;
+      border: 1px solid var(--line);
+      background: var(--card);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--sub);
       &:disabled {
         opacity: 0.7;
       }
@@ -41,19 +58,32 @@ export const BusHomeWrap = styled.div`
     }
   }
   .box_button {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-    background: #e5e5e5;
-    padding: 3px;
-    height: 40px;
-    border-radius: 6px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
     .button_mode {
-      width: 100%;
-      border-radius: 6px;
+      width: 70px;
+      min-height: 44px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #3a4350;
       &.active {
-        background: #fff;
+        color: var(--text);
+        text-decoration: underline;
+        text-decoration-color: var(--accent);
+        text-decoration-thickness: 3px;
+        text-underline-offset: 6px;
       }
     }
+  }
+  .box_legend {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: #5c6676;
   }
 `;

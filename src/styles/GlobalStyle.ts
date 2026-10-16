@@ -3,21 +3,21 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
   /* ===== 디자인 토큰 ===== */
   :root {
-    --bg: #f7f5ef;
-    --card: #ffffff;
-    --text: #17181a;
-    --sub: #5a5e66;
-    --line: #ecedea;
-    --accent: #1f4fd1;
+    --bg: #0e1116;
+    --card: #161b22;
+    --text: #e8ecf2;
+    --sub: #8b95a5;
+    --line: #232a35;
+    --accent: #ff8a3d;
 
-    --bus-seat: #c8321a;
-    --bus-general: #2f7d3a;
-    --bus-village: #7a5a00;
+    --bus-seat: #e5483a;
+    --bus-general: #3fa45b;
+    --bus-village: #b08a2e;
 
     --chip-bg: #e2eafb;
     --chip-text: #1a3f9e;
     --warn-bg: #fdebd8;
-    --warn-text: #8a4100;
+    --warn-text: #ffb27a;
 
     --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
     --mono: "IBM Plex Mono", monospace;
@@ -81,6 +81,7 @@ export const GlobalStyle = createGlobalStyle`
   #root {
     max-width: 480px;
     margin: 0 auto;
-    padding: 24px 16px 40px;
+    padding: 28px 18px 40px; 
+    overflow-x: hidden;  
   }
 `;

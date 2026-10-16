@@ -43,8 +43,20 @@ export const busKind = (routeTypeCd: number): BusKind => {
   return "general"; // 시내버스
 };
 
+//좌석 5석 이하이거나 혼잡(3) 이상이면 경고
 export const isCapacityWarn = (bus: BusArrival) => {
   const seats = bus.remainSeatCnt1;
   if (isSeatBus(bus) && seats !== "" && seats >= 0) return seats <= 5;
   return bus.crowded1 !== "" && bus.crowded1 >= 3;
 };
+
+export const urgencyColor = (min: number | "") => {
+  if (min === "") return "var(--sub)";
+  if (min <= 3) return "#ff5a4e";
+  if (min <= 8) return "#ffc23d";
+  return "#5eead4";
+};
+
+// 버스 아이콘을 트랙 위에 놓을 위치 계산
+export const trackPos = (stops: number | "") =>
+  stops === "" ? 0 : Math.round((1 - Math.min(stops, 10) / 10) * 100);

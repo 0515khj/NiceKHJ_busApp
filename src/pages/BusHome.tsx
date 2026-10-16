@@ -22,7 +22,7 @@ const BusHome = () => {
     setError(null);
     try {
       const results = await Promise.all(
-        stops.map((st) => fetchArrivals(st.stationId)),
+        presets[mode].map((st) => fetchArrivals(st.stationId)),
       );
       setArrivals(results);
       setUpdatedAt(new Date());
@@ -61,13 +61,23 @@ const BusHome = () => {
   };
 
   return (
-    <BusHomeWrap>
-      <div className="box_today">
-        {today} / {time}
-      </div>
-
+    <BusHomeWrap $mode={mode}>
       <div className="box_bus-reload">
-        <span className="text_bus-title">{modeLabel[mode]}</span>
+        <div className="box_button">
+          <button
+            className={`button_mode work ${mode === "work" ? "active" : ""}`}
+            onClick={() => setMode("work")}
+          >
+            출근
+          </button>
+          <button
+            className={`button_mode home ${mode === "home" ? "active" : ""}`}
+            onClick={() => setMode("home")}
+          >
+            퇴근
+          </button>
+        </div>
+
         <button
           className="button_reload"
           onClick={reload}
@@ -79,21 +89,15 @@ const BusHome = () => {
         </button>
       </div>
 
+      <div className="box_today">
+        {today} / {modeLabel[mode]}
+      </div>
+
       {error && <p>에러 : {error}</p>}
 
-      <div className="box_button">
-        <button
-          className={`button_mode work ${mode === "work" ? "active" : ""}`}
-          onClick={() => setMode("work")}
-        >
-          출근 😑
-        </button>
-        <button
-          className={`button_mode home ${mode === "home" ? "active" : ""}`}
-          onClick={() => setMode("home")}
-        >
-          퇴근 😁
-        </button>
+      <div className="box_legend">
+        <span>← 멀리</span>
+        <span>내 정류장 ●</span>
       </div>
 
       {stops.map((stop, idx) => (

@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
   /* ===== 디자인 토큰 ===== */
   :root {
-    --bg: #f2f3f0;
+    --bg: #f7f5ef;
     --card: #ffffff;
     --text: #17181a;
     --sub: #5a5e66;

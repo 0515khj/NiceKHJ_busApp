@@ -4,6 +4,7 @@ import { presets, type Mode } from "@/conpig/presets";
 import type { BusArrival } from "@/types/bus";
 import { useCallback, useEffect, useState } from "react";
 import { BusHomeWrap } from "./busHomeStyle";
+import { ImSpinner11 } from "react-icons/im";
 
 const BusHome = () => {
   const [mode, setMode] = useState<Mode>("work");
@@ -65,9 +66,14 @@ const BusHome = () => {
 
       <div className="box_bus-reload">
         <span className="text_bus-title">{modeLabel[mode]}</span>
-        <button className="button_reload" onClick={reload} disabled={loading}>
-          <i>O</i>
-          {loading ? "불러오는 중..." : "새로고침"}
+        <button
+          className="button_reload"
+          onClick={reload}
+          disabled={loading}
+          aria-label="새로고침"
+        >
+          <ImSpinner11 />
+          {loading ? "불러오는 중" : time ? `${time} 기준` : "새로고침"}
         </button>
       </div>
 

@@ -1,75 +1,24 @@
-# React + TypeScript + Vite
+# 내 버스 (출퇴근 버스 도착 알림)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+경기도 버스도착정보 API로 나만의 출퇴근 정류장의 버스 도착 시간을 보여주는 웹앱.
+배포: https://nicekhjbus-app.vercel.app
 
-Currently, two official plugins are available:
+## 스택
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+React + TypeScript + Vite, styled-components, axios, Vercel 서버 함수
 
-## React Compiler
+## 구조
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- api/bus.ts: Vercel 서버 함수 (인증키 붙여서 공공데이터 API 호출)
+- src/conpig/presets.ts: 출퇴근 정류장/버스 설정 (v2에서 localStorage로 변경 예정)
+- src/pages/BusHome.tsx: 탭, 데이터 불러오기, 1분 자동 갱신
+- src/components/StationCard.tsx, BusRow.tsx: 정류장 카드, 버스 한 줄
+- src/utils/busFormat.ts: 화면용 글자 변환
 
-## Expanding the ESLint configuration
+## 환경변수
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+BUS_API_KEY: 공공데이터포털 인증키 (.env.local, Vercel 환경변수)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 다음 할 일
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+v2 기획서 참고: 정류장 검색해서 직접 추가하는 기능 (1단계 usePresets부터)

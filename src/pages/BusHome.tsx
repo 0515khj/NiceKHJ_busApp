@@ -7,7 +7,9 @@ import { BusHomeWrap } from "./busHomeStyle";
 import { ImSpinner11 } from "react-icons/im";
 
 const BusHome = () => {
-  const [mode, setMode] = useState<Mode>("work");
+  const [mode, setMode] = useState<Mode>(() =>
+    new Date().getHours() < 12 ? "work" : "home",
+  );
   const [arrivals, setArrivals] = useState<BusArrival[][]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
